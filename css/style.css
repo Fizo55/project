@@ -1,0 +1,20 @@
+.information
+{
+  margin-left:10px;
+  margin-top:19px;
+  vertical-align:-42px;
+}
+
+.menu
+{
+  margin-top:5px;
+  list-style:none;
+  background-color:red;
+  height:50px;
+}
+
+.panel
+{
+	width:800px;
+	margin-left:220px;
+}
