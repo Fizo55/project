@@ -73,7 +73,7 @@ class Database{
 
     public static function Login($array)
     {
-    	if($_POST)
+    	if($array)
     	{
     		if(!empty($array['username']))
     		{
