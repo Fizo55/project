@@ -81,7 +81,7 @@ class Database{
     			{
     				$obj = new Database('root','','open');
     				$pass = hash('sha512', $array['password']);
-    				$req = $obj->query("SELECT * FROM users WHERE username = ? AND password = ?", [$array['username'], $array['password']]);
+    				$req = $obj->query("SELECT * FROM users WHERE username = ? AND password = ?", [$array['username'], $pass]);
     				if($req->fetch())
     				{
     					$_SESSION['auth'] = $array['username'];
