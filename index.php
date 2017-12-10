@@ -1,6 +1,7 @@
 <?php
 	require_once 'function/boostrap.php';
 	$db = App::getDatabase();
+	session_start();
 ?>
 <!DOCTYPE html>
 	<html>
@@ -12,10 +13,18 @@
 		</head>
 		<body>
 			<div class="collapse navbar-collapse">
-				<ul class="nav navbar-nav navbar-left">
-					<li><a href="register.php">Inscription</a></li>
-					<li><a href="login.php">Connexion</a></li>
-				</ul>
+				<?php if(empty($_SESSION['auth'])): ?>
+					<ul class="nav navbar-nav navbar-left">
+						<li><a href="register.php">Inscription</a></li>
+						<li><a href="login.php">Connexion</a></li>
+					</ul>
+				<?php endif; ?>
+				<?php if(!empty($_SESSION['auth'])): ?>
+					<ul class="nav navbar-nav navbar-left">
+						<li><a href="membre.php">Espace membre</a></li>
+						<li><a href="logout.php">Déconnexion</a></li>
+					</ul>
+				<?php endif; ?>
 			</div>
 			<h1 style="text-align:center;margin-top:60px;">Nouveautés</h1>
 			<br/> <br/>
