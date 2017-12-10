@@ -21,7 +21,7 @@
 				<?php endif; ?>
 				<?php if(!empty($_SESSION['auth'])): ?>
 					<ul class="nav navbar-nav navbar-left">
-						<li><a href="membre.php">Espace membre</a></li>
+						<li><a href="password_modify.php">Modifier mon mot de passe</a></li>
 						<li><a href="logout.php">Déconnexion</a></li>
 					</ul>
 				<?php endif; ?>

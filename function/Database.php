@@ -103,5 +103,36 @@ class Database{
     		}
     	}
     }
+
+    public static function ModifyPassword($array)
+    {
+    	if($array)
+    	{
+    		if(!empty($array['password']))
+    		{
+    			if(!empty($array['password_co']))
+    			{
+    				if($array['password'] === $array['password_co'])
+    				{
+    					$obj = new Database('root','','open');
+    					$pass = hash('sha512', $array['password']);
+    					$req = $obj->query("UPDATE users SET password = ? WHERE username = ?",[$pass, $_SESSION['auth']]);
+    					echo '<h2>Votre mot de passe a bien été modifier !</h2>';
+    				}
+    				else {
+    					echo '<h2>Vos mots de passe ne correspondent pas !</h2>';
+    				}
+    			}
+    			else
+    			{
+    				echo '<h2>Veuillez confirmer votre mot de passe !</h2>';
+    			}
+    		}
+    		else
+    		{
+    			echo '<h2>Merci de renseigner un mot de passe !</h2>';
+    		}
+    	}
+    }
     
 }
