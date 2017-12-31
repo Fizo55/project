@@ -32,17 +32,17 @@ class Database{
     					if($array['password'] === $array['password_co'])
     					{
     						$obj = new Database('root','','open');
-    						$req = $obj->query("SELECT * FROM users WHERE username = ?", $array['username']);
+    						$req = $obj->query("SELECT * FROM users WHERE username = ?", htmlspecialchars($array['username']));
     						if($req->fetch())
     						{
     							echo '<h2>Votre identifiants est déjà utiliser</h2>';
     						}
     						else
     						{
-	    						$pass = hash('sha512', $array['password']);
+	    						$pass = hash('sha512', htmlspecialchars($array['password']));
 	    						$req = $obj->query("INSERT INTO users (username,email,password,ip) VALUES (?,?,?,?)",[
-									$array['username'], 
-									$array['email'], 
+									htmlspecialchars($array['username']), 
+									htmlspecialchars($array['email']), 
 									$pass, 
 									$_SERVER['REMOTE_ADDR']
 								]);
@@ -80,11 +80,11 @@ class Database{
     			if(!empty($array['password']))
     			{
     				$obj = new Database('root','','open');
-    				$pass = hash('sha512', $array['password']);
-    				$req = $obj->query("SELECT * FROM users WHERE username = ? AND password = ?", [$array['username'], $pass]);
+    				$pass = hash('sha512', htmlspecialchars($array['password']));
+    				$req = $obj->query("SELECT * FROM users WHERE username = ? AND password = ?", [htmlspcialchars($array['username']), $pass]);
     				if($req->fetch())
     				{
-    					$_SESSION['auth'] = $array['username'];
+    					$_SESSION['auth'] = htmlspecialchars($array['username']);
     					header('Location: index.php');
     				}
     				else
@@ -115,8 +115,8 @@ class Database{
     				if($array['password'] === $array['password_co'])
     				{
     					$obj = new Database('root','','open');
-    					$pass = hash('sha512', $array['password']);
-    					$req = $obj->query("UPDATE users SET password = ? WHERE username = ?",[$pass, $_SESSION['auth']]);
+    					$pass = hash('sha512', htmlspecialchars($array['password']));
+    					$req = $obj->query("UPDATE users SET password = ? WHERE username = ?",[$pass, htmlspecialchars($_SESSION['auth'])]);
     					echo '<h2>Votre mot de passe a bien été modifier !</h2>';
     				}
     				else {
