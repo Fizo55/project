@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	require_once 'config.php';
 	if(!empty($_SESSION['auth']))
 	{
 		header('Location: index.php');
@@ -79,6 +80,8 @@
 				<br/>
 				<span class="fa fa-envelope-o fa-3x" aria-hidden="true"></span>
 				<input type="email" name="email" placeholder="Votre adresse email" class="form-control">
+				<br/>
+				<div class="g-recaptcha" data-sitekey="<?= $publicKey; ?>"></div>
 				<br/>
 				<center><button type="submit" class="btn btn-success">M'inscrire</button></center>
 			</div>

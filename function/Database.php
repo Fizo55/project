@@ -21,6 +21,8 @@ class Database{
 
     public static function Register($array)
     {
+		require_once '../recaptchalib.php';
+		require_once '../config.php';
     	if($array)
     	{
     		if(!empty($array['username']))
@@ -39,14 +41,29 @@ class Database{
     						}
     						else
     						{
-	    						$pass = hash('sha512', htmlspecialchars($array['password']));
-	    						$req = $obj->query("INSERT INTO users (username,email,password,ip) VALUES (?,?,?,?)",[
-									htmlspecialchars($array['username']), 
-									htmlspecialchars($array['email']), 
-									$pass, 
-									$_SERVER['REMOTE_ADDR']
-								]);
-								echo "<h2>Votre compte a bien été créer !</h2>";
+								$reCaptcha = new ReCaptcha($privateKey);
+								if(isset($_POST["g-recaptcha-response"])) 
+								{
+									$resp = $reCaptcha->verifyResponse(
+										$_SERVER["REMOTE_ADDR"],
+										$_POST["g-recaptcha-response"]
+										);
+									if ($resp != null && $resp->success) 
+									{
+										$pass = hash('sha512', htmlspecialchars($array['password']));
+										$req = $obj->query("INSERT INTO users (username,email,password,ip) VALUES (?,?,?,?)",[
+											htmlspecialchars($array['username']), 
+											htmlspecialchars($array['email']), 
+											$pass, 
+											$_SERVER['REMOTE_ADDR']
+										]);
+										echo "<h2>Votre compte a bien été créer !</h2>";
+									}
+									else 
+									{
+										echo "CAPTCHA incorrect";
+									}
+								}
 							}
     					}
     					else
