@@ -21,8 +21,8 @@ class Database{
 
     public static function Register($array)
     {
-		require_once '../recaptchalib.php';
-		require_once '../config.php';
+	require_once '../recaptchalib.php';
+	require_once '../config.php';
         if($array)
         {
             if(!empty($array['username']) && !empty($array['password']) && !empty($array['email']) && !empty($aray['g-recaptcha-response']))
