@@ -30,10 +30,10 @@
 			<br/> <br/>
 			<?php 
 				$req = $db->query("SELECT * FROM news ORDER BY id DESC");
-		while($news = $req->fetch(PDO::FETCH_ASSOC)): ?>
-			<div class="panel">
-					<p class="information"><img class="information" src="<?= $news['image']; ?>" alt="news" style="width:100px;height:100px;"/> <?= $news['message']; ?></p>
-			</div>
-		<?php endwhile; ?>
+				while($news = $req->fetch(PDO::FETCH_ASSOC)): ?>
+					<div class="panel">
+							<p class="information"><img class="information" src="<?= $news['image']; ?>" alt="news" style="width:100px;height:100px;"/> <?= $news['message']; ?></p>
+					</div>
+				<?php endwhile; ?>
 		</body>
 	</html>

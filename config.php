@@ -1,6 +1,7 @@
 <?php
-
-    $publicKey = ""; // Clé publique
-    $privateKey = ""; // Clé privé
-
+    $publicKey = "";
+    $privateKey = "";
+    $DBUsername = "root";
+    $DBPassword = "";
+    $DBName = "name";
 ?>
