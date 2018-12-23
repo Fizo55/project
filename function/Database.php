@@ -25,7 +25,7 @@ class Database{
 	 require_once '../config.php';
         if($array)
         {
-            if(!empty($array['username']) && !empty($array['password']) && !empty($array['email']) && !empty($aray['g-recaptcha-response']))
+            if(!empty($array['username']) && !empty($array['password']) && !empty($array['email']) && !empty($array['g-recaptcha-response']))
             {
                 if($array['password'] === $array['password_co'])
                 {
